@@ -15,6 +15,6 @@ public class RestResponseExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(ErrorResponse.builder()
                 .errorMessage(exception.getMessage())
                 .errorCode(exception.getErrorCode())
-                .build(), HttpStatus.NOT_FOUND);
+                .build(), HttpStatus.NOT_FOUND); 
     }
 }
