@@ -1,7 +1,7 @@
 package com.product.service;
 
 import com.product.entity.Product;
-import com.product.exceptions.ProductNotFoundException;
+import com.product.exceptions.ProductCustomException;
 import com.product.model.ProductRequest;
 import com.product.model.ProductResponse;
 import com.product.repository.ProductRepository;
@@ -9,9 +9,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Log4j2
@@ -53,8 +51,24 @@ public class ProductServiceImpl implements ProductService {
            return productRepository
                    .findById(productId)
                    .map(this::mapToProductResponse)
-                   .orElseThrow(()-> new ProductNotFoundException("Product not found", "PRODUCT_NOT_FOUND"));
+                   .orElseThrow(()-> new ProductCustomException("Product not found", "PRODUCT_NOT_FOUND"));
 
+    }
+
+    @Override
+    public void reduceQuantity(long productId, long quantity) {
+        log.info("reduce quantity");
+        Product product = productRepository.findById(productId).orElseThrow(
+                () -> new ProductCustomException("Product with given id ","PRODUCT_NOT_FOUND")
+                );
+
+        if(product.getQuanity() < quantity){
+            throw new ProductCustomException("Running out of stock", "INSUFFICIENT_QUANTITY");
+        }
+
+        product.setQuanity(product.getQuanity()-quantity);
+        productRepository.save(product);
+        log.info("Product stock updated");
     }
 
     private ProductResponse mapToProductResponse(Product product) {
