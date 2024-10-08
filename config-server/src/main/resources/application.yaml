@@ -1,13 +1,14 @@
 server:
-  port: 9296
-
+  port: 8191
 spring:
   application:
-    name: CONFIG-SERVER
+    name: config-server
   cloud:
     config:
       server:
         git:
-          uri: https://github.com/NandabasappaHalli/configserver
+          uri: https://github.com/NandabasappaHalli/config-repo
           clone-on-start: true
-
+          search-paths:
+            - "*service"
+#          default-label: main

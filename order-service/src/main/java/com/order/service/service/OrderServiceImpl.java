@@ -1,6 +1,5 @@
 package com.order.service.service;
 
-import com.netflix.discovery.converters.Auto;
 import com.order.service.entities.Order;
 import com.order.service.exceptions.OrderNotFoundException;
 import com.order.service.external.client.ProductService;
@@ -8,14 +7,10 @@ import com.order.service.model.OrderRequest;
 import com.order.service.model.OrderResponse;
 import com.order.service.repository.OrderRepository;
 import lombok.extern.log4j.Log4j2;
-import org.aspectj.weaver.ast.Or;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.time.Instant;
-import java.util.Optional;
 
 @Service
 @Log4j2
