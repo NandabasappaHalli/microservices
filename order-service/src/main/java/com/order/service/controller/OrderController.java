@@ -16,6 +16,10 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @GetMapping
+    public String ping(){
+        return "Success";
+    }
     @PostMapping("/placeOrder")
     public ResponseEntity<Long> addOrder(@RequestBody OrderRequest orderRequest) {
         long orderId = orderService.addOrder(orderRequest);
