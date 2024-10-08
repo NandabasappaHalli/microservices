@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: productservice
+
+ # datasource:
+  #  hikari:
+   #   data-source-properties:
+ #       gssEncMode: disbale
+ #       gsslib: disable
+  cloud:
+    config:
+      uri: http://localhost:8191
+      name: productservice
+      profile: dev
+
+  profiles:
+    active: dev
